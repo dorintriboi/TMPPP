@@ -1,4 +1,5 @@
 using System.Reflection;
+using Core.Configuration;
 using Core.Services.Team.Commands.CreateTeam;
 using Domain.Entities.User;
 using FluentValidation;
@@ -22,8 +23,11 @@ using Infrastructure.Repositories.GenericRepository.BaseGenericRepository;
 using Infrastructure.Repositories.GenericRepository.FullAuditGenericRepository;
 using Infrastructure.Repositories.UnitOfWorkRepository;
 using Infrastructure.Repositories.UnitOfWorkRepository.ApplicationUnitOfWork;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,7 +40,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetAssembly(typeof(CreateTeamHandler)));
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetAssembly(typeof(CreateTeamHandler))));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetAssembly(typeof(CreateTeamHandler)) ??
+                                                                    throw new InvalidOperationException(
+                                                                        "Can't find mediator assembly")));
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ??
                        throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -47,7 +53,8 @@ builder.Services.AddIdentity<UserEntity, IdentityRole<string>>(
         options =>
         {
             options.User.RequireUniqueEmail = true;
-            options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ -|%'";
+            options.User.AllowedUserNameCharacters =
+                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ -|%'";
         })
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
@@ -60,6 +67,66 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequiredLength = 5;
     options.Password.RequireLowercase = false;
     options.Password.RequireUppercase = true;
+});
+
+var section = builder.Configuration.GetSection("AuthOptions");
+builder.Services.Configure<AuthOptions>(section);
+var authOptions = section.Get<AuthOptions>();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = authOptions?.Issuer,
+
+        ValidateAudience = true,
+        ValidAudience = authOptions?.Audience,
+
+        ValidateLifetime = true,
+
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = authOptions?.GetSymmetricSecurityKey(),
+    };
+});
+
+builder.Services.AddSwaggerGen(swagger =>
+{
+    swagger.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Teatru project 1",
+        Description = "InternalProject"
+    });
+
+    swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description =
+            "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer tokenText\"",
+    });
+    swagger.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
 
 builder.Services.AddTransient(typeof(IBaseGenericRepository<>), typeof(BaseGenericRepository<>));
@@ -80,6 +147,14 @@ builder.Services.AddTransient<ITeamMemberRepository, TeamMemberRepository>();
 
 var app = builder.Build();
 
+/*
+using (var scope = app.Services.GetService<IServiceScopeFactory>()!.CreateScope())
+{
+    scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
+}
+*/
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -89,6 +164,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proiect_Teatru.Models.V1.In.Team;
 using Proiect_Teatru.Models.V1.Out.Team;
@@ -11,6 +12,7 @@ public class Team(IMediator mediator) : ControllerBase
 {
 
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult?> CreateTeam(CreateTeamRequestViewModel request)
     {
         var ceva = await mediator.Send(request.Convert());
