@@ -1,4 +1,5 @@
-﻿using Domain.Core.Domain.Entities;
+﻿using System.Web.Helpers;
+using Domain.Core.Domain.Entities;
 using Domain.Entities.Employee;
 using Domain.Entities.EmployeeSalary;
 using Domain.Entities.Event;
@@ -45,6 +46,27 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity, IdentityRole<s
         {
             Id = new Guid("eeccb9fa-17c8-44c3-9ebf-b6d32ec6354f").ToString(), Name = "User", NormalizedName = "USER"
         });
+
+        modelBuilder.Entity<UserEntity>().HasData(new UserEntity
+        {
+            Id = new Guid("02ccf5fd-ce71-45a7-a373-ea49c807d67b").ToString(),
+            Email = "admin@admin.com",
+            UserName = "admin@admin.com",
+            PasswordHash = Crypto.HashPassword("Qwe123!"),
+            NormalizedEmail = "ADMIN@ADMIN.COM",
+            NormalizedUserName = "ADMIN@ADMIN.COM",
+            PhoneNumber = "000000000",
+            FirstName = "Admin",
+            LastName = "Admin"
+        });
+
+        modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>()
+        {
+            RoleId = new Guid("2b391be4-2886-4ff9-a065-f6c45ba46b60").ToString(),
+            UserId = new Guid("02ccf5fd-ce71-45a7-a373-ea49c807d67b").ToString()
+        });
+        
+        modelBuilder.Entity<UserEntity>().HasIndex(x => x.PhoneNumber).IsUnique();
     }
 
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,

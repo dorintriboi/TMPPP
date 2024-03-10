@@ -34,9 +34,9 @@ public class Account(IMediator mediator) : ControllerBase
 
             return Ok(token);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return Unauthorized();
+            return Unauthorized(ex.Message);
         }
     }
 

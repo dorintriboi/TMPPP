@@ -35,22 +35,22 @@ namespace Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletionTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    EmployeeId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmployeeId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
@@ -76,7 +76,7 @@ namespace Infrastructure.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Director = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
@@ -97,7 +97,7 @@ namespace Infrastructure.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
@@ -116,7 +116,7 @@ namespace Infrastructure.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
@@ -242,7 +242,7 @@ namespace Infrastructure.Migrations
                     DateOfBirth = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
@@ -272,7 +272,7 @@ namespace Infrastructure.Migrations
                     Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
@@ -311,7 +311,7 @@ namespace Infrastructure.Migrations
                     Type = table.Column<int>(type: "int", nullable: false),
                     Value = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
@@ -338,7 +338,7 @@ namespace Infrastructure.Migrations
                     TeamId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Direction = table.Column<int>(type: "int", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
@@ -371,6 +371,16 @@ namespace Infrastructure.Migrations
                     { "eeccb9fa-17c8-44c3-9ebf-b6d32ec6354f", null, "User", "USER" }
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreationTime", "CreatorUserId", "DeleterUserId", "DeletionTime", "Email", "EmailConfirmed", "EmployeeId", "FirstName", "IsDeleted", "LastModificationTime", "LastModifierUserId", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { "02ccf5fd-ce71-45a7-a373-ea49c807d67b", 0, "a32c28ee-31b6-4b7a-8c01-21d0e5d6d071", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@admin.com", false, null, "Admin", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), null, "Admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AL8qWPhv0ySMra56hmzlMwKcl1xGfo97SYVXtvb8B98DPSbNadeepgYNkW1L34MMrw==", "000000000", false, null, false, "admin@admin.com" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "2b391be4-2886-4ff9-a065-f6c45ba46b60", "02ccf5fd-ce71-45a7-a373-ea49c807d67b" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -402,6 +412,13 @@ namespace Infrastructure.Migrations
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_PhoneNumber",
+                table: "AspNetUsers",
+                column: "PhoneNumber",
+                unique: true,
+                filter: "[PhoneNumber] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
