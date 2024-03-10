@@ -17,4 +17,16 @@ public class UserEntity : IdentityUser<string>, IFullAudit
     public DateTimeOffset LastModificationTime { get; set; }
     public string EmployeeId { get; set; }
     public virtual EmployeeEntity Employee { get; set; }
+
+    public static UserEntity Create(string firstName, string lastName, string password, string email, string phone)
+    {
+        return new UserEntity()
+        {
+            FirstName = firstName,
+            LastName = lastName,
+            PasswordHash = password,
+            Email = email,
+            PhoneNumber = phone
+        };
+    }
 }
