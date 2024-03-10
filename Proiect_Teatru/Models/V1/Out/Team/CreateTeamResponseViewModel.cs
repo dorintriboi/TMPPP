@@ -1,13 +1,14 @@
-﻿using Core.Services.Team.Common;
+﻿using Core.Interfaces.Out;
+using Core.Services.Team.Common;
 
 namespace Proiect_Teatru.Models.V1.Out.Team;
 
-public class CreateTeamResponseViewModel
+public class CreateTeamResponseViewModel : IResponse<CreateTeamResponseViewModel,TeamDto>
 {
     public string Id { get; set; }
     public string Name { get; set; }
 
-    public static CreateTeamResponseViewModel Convert(TeamDto dto)
+    public static IResponse<CreateTeamResponseViewModel, TeamDto> Convert(TeamDto dto)
     {
         if (dto is null) return null;
         

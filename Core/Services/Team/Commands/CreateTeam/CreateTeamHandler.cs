@@ -6,14 +6,14 @@ using MediatR;
 
 namespace Core.Services.Team.Commands.CreateTeam;
 
-public class CreateTeamHandler(IApplicationUnitOfWork _repository) : IRequestHandler<CreateTeamCommand, TeamDto>
+public class CreateTeamHandler(IApplicationUnitOfWork repository) : IRequestHandler<CreateTeamCommand, TeamDto>
 {
     public async Task<TeamDto> Handle(CreateTeamCommand request, CancellationToken cancellationToken)
     {
         var team = TeamEntity.Create(request.Name);
         
-        await _repository.TeamRepository.InsertAsync(team);
-        await _repository.SaveAsync();
+        await repository.TeamRepository.InsertAsync(team);
+        await repository.SaveAsync();
         
         return TeamDto.From(team);
     }

@@ -1,4 +1,5 @@
-﻿using Domain.Core.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using Domain.Core.Domain.Entities;
 using Domain.Entities.Event.Enum;
 using Domain.Entities.Institution;
 using Domain.Entities.Spectacle;

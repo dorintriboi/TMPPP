@@ -31,10 +31,16 @@ public class RegisterUserHandler(
         {
             throw new Exception(ex.Message);
         }
+        
+        if (!result.Succeeded)
+        {
+            var errorMessage = string.Join('\n', result.Errors.Select(x => x.Description).ToArray());
+            throw new Exception(errorMessage);
+        }
 
         var addToRole = await userManager.AddToRoleAsync(user, "User");
 
-        if (!result.Succeeded || !addToRole.Succeeded)
+        if (!addToRole.Succeeded)
         {
             var errorMessage = string.Join('\n', result.Errors.Select(x => x.Description).ToArray());
             throw new Exception(errorMessage);

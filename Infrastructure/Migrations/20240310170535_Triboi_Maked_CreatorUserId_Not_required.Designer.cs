@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240222092101_Initial_Migration_Creation_Database")]
-    partial class Initial_Migration_Creation_Database
+    [Migration("20240310170535_Triboi_Maked_CreatorUserId_Not_required")]
+    partial class Triboi_Maked_CreatorUserId_Not_required
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,9 @@ namespace Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -34,7 +37,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatorUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DateOfBirth")
@@ -42,7 +44,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeleterUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("DeletionTime")
@@ -55,7 +56,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("LastModifierUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
@@ -79,11 +79,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatorUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeleterUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("DeletionTime")
@@ -100,7 +98,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("LastModifierUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Type")
@@ -125,14 +122,12 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatorUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("Date")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("DeleterUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("DeletionTime")
@@ -149,7 +144,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("LastModifierUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
@@ -190,11 +184,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatorUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeleterUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("DeletionTime")
@@ -218,7 +210,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("LastModifierUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Locality")
@@ -250,11 +241,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatorUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeleterUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("DeletionTime")
@@ -271,7 +260,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("LastModifierUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -295,11 +283,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatorUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeleterUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("DeletionTime")
@@ -312,7 +298,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("LastModifierUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -333,11 +318,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("CreatorUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DeleterUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("DeletionTime")
@@ -357,7 +340,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("LastModifierUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TeamId")
@@ -499,6 +481,20 @@ namespace Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "2b391be4-2886-4ff9-a065-f6c45ba46b60",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "eeccb9fa-17c8-44c3-9ebf-b6d32ec6354f",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

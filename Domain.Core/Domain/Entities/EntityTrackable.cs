@@ -10,5 +10,5 @@ public class EntityTrackable : Entity, ITrackable
     }
     
     public DateTimeOffset CreationTime { get; set; }
-    public string CreatorUserId { get; set; }
+    public string? CreatorUserId { get; set; }
 }

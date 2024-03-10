@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Migration_Creation_Database : Migration
+    public partial class Triboi_Initial_Migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,10 +77,10 @@ namespace Infrastructure.Migrations
                     Director = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletionTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
@@ -96,10 +98,10 @@ namespace Infrastructure.Migrations
                     Type = table.Column<int>(type: "int", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletionTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
@@ -115,10 +117,10 @@ namespace Infrastructure.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletionTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
@@ -241,10 +243,10 @@ namespace Infrastructure.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletionTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
@@ -271,10 +273,10 @@ namespace Infrastructure.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletionTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
@@ -310,10 +312,10 @@ namespace Infrastructure.Migrations
                     Value = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletionTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
@@ -337,10 +339,10 @@ namespace Infrastructure.Migrations
                     Direction = table.Column<int>(type: "int", nullable: false),
                     CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
-                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DeletionTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
                 },
                 constraints: table =>
@@ -358,6 +360,15 @@ namespace Infrastructure.Migrations
                         principalTable: "Teams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "2b391be4-2886-4ff9-a065-f6c45ba46b60", null, "Admin", "ADMIN" },
+                    { "eeccb9fa-17c8-44c3-9ebf-b6d32ec6354f", null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

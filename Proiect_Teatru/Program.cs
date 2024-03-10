@@ -26,6 +26,7 @@ using Infrastructure.Repositories.UnitOfWorkRepository.ApplicationUnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -49,6 +50,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
+builder.Services.AddScoped(cfg => cfg.GetRequiredService<IOptions<AuthOptions>>().Value);
+
 builder.Services.AddIdentity<UserEntity, IdentityRole<string>>(
         options =>
         {
@@ -57,6 +60,13 @@ builder.Services.AddIdentity<UserEntity, IdentityRole<string>>(
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ -|%'";
         })
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+});
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -144,16 +154,14 @@ builder.Services.AddTransient<ISpectacleRepository, SpectacleRepository>();
 builder.Services.AddTransient<ITeamRepository, TeamRepository>();
 builder.Services.AddTransient<ITeamMemberRepository, TeamMemberRepository>();
 
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
-/*
 using (var scope = app.Services.GetService<IServiceScopeFactory>()!.CreateScope())
 {
     scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
 }
-*/
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
