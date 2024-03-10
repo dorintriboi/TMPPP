@@ -1,5 +1,6 @@
 ﻿using Domain.Entities.Event;
 using Infrastructure.Data;
+using Infrastructure.Repositories.BusinessRepository.Event.Interface;
 using Infrastructure.Repositories.GenericRepository.FullAuditGenericRepository;
 
 namespace Infrastructure.Repositories.BusinessRepository.Event;

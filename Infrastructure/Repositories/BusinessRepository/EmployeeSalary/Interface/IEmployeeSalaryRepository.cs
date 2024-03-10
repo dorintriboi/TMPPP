@@ -1,6 +1,6 @@
 ﻿using Domain.Entities.EmployeeSalary;
 using Infrastructure.Repositories.GenericRepository.FullAuditGenericRepository;
 
-namespace Infrastructure.Repositories.BusinessRepository.EmployeeSalary;
+namespace Infrastructure.Repositories.BusinessRepository.EmployeeSalary.Interface;
 
 public interface IEmployeeSalaryRepository : IFullAuditGenericRepository<EmployeeSalaryEntity>;
