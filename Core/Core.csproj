@@ -9,6 +9,7 @@
     <ItemGroup>
       <Folder Include="Extentions\" />
       <Folder Include="ExternalServices\" />
+      <Folder Include="Services\Account\Common\" />
       <Folder Include="Services\Team\Queries\" />
     </ItemGroup>
 
