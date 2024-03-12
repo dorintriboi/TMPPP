@@ -4,11 +4,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proiect_Teatru", "Proiect_T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{FE7E5933-068F-46A6-B016-99E956433F6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{ED407A05-0990-48C1-BE98-F3C3CEDE9E23}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{ED407A05-0990-48C1-BE98-F3C3CEDE9E23}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{DD787EEF-23BC-404C-809B-E1D981A6FCEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Core", "Domain.Core\Domain.Core.csproj", "{3E5B6EB8-230C-4E9C-8BC7-94A77DA62551}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Core", "Application.Core\Application.Core.csproj", "{346BA299-FB9F-46FB-973C-6900D6A712E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,5 +38,9 @@ Global
 		{3E5B6EB8-230C-4E9C-8BC7-94A77DA62551}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E5B6EB8-230C-4E9C-8BC7-94A77DA62551}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E5B6EB8-230C-4E9C-8BC7-94A77DA62551}.Release|Any CPU.Build.0 = Release|Any CPU
+		{346BA299-FB9F-46FB-973C-6900D6A712E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{346BA299-FB9F-46FB-973C-6900D6A712E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{346BA299-FB9F-46FB-973C-6900D6A712E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{346BA299-FB9F-46FB-973C-6900D6A712E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

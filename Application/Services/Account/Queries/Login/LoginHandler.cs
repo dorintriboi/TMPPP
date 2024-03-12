@@ -1,6 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Core.Configuration;
+using Application.Core.Configuration;
 using Core.Services.Account.Queries.Login.DTOs;
 using Domain.Entities.User;
 using MediatR;

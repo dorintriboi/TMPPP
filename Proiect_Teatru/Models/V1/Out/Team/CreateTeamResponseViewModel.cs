@@ -1,5 +1,5 @@
-﻿using Core.Interfaces.Out;
-using Core.Services.Team.Common;
+﻿using Core.Services.Team.Common;
+using Proiect_Teatru.Models.Interfaces.Out;
 
 namespace Proiect_Teatru.Models.V1.Out.Team;
 

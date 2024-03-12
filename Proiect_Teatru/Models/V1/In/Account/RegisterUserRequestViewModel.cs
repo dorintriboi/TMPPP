@@ -1,5 +1,5 @@
-﻿using Core.Interfaces.In;
-using Core.Services.Account.Commands.UserRegister.DTOs;
+﻿using Core.Services.Account.Commands.UserRegister.DTOs;
+using Proiect_Teatru.Models.Interfaces.In;
 
 namespace Proiect_Teatru.Models.V1.In.Account;
 

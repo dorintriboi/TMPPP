@@ -1,5 +1,5 @@
-﻿using Core.Interfaces.In;
-using Core.Services.Team.Commands.CreateTeam.DTOs;
+﻿using Core.Services.Team.Commands.CreateTeam.DTOs;
+using Proiect_Teatru.Models.Interfaces.In;
 
 namespace Proiect_Teatru.Models.V1.In.Team;
 

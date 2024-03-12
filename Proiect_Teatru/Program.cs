@@ -1,5 +1,5 @@
 using System.Reflection;
-using Core.Configuration;
+using Application.Core.Configuration;
 using Core.Services.Team.Commands.CreateTeam;
 using Domain.Entities.User;
 using FluentValidation;

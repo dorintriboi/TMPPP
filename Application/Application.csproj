@@ -4,12 +4,16 @@
         <TargetFramework>net8.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>Core</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <Folder Include="Extentions\" />
       <Folder Include="ExternalServices\" />
       <Folder Include="Services\Account\Common\" />
+      <Folder Include="Services\Event\Commands\" />
+      <Folder Include="Services\Event\Common\" />
+      <Folder Include="Services\Event\Queries\" />
       <Folder Include="Services\Team\Queries\" />
     </ItemGroup>
 
@@ -21,6 +25,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Application.Core\Application.Core.csproj" />
       <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>
 

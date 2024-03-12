@@ -1,4 +1,4 @@
-﻿namespace Core.Interfaces.Out;
+﻿namespace Proiect_Teatru.Models.Interfaces.Out;
 
 public interface IResponse<T, TT>
 {

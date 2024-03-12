@@ -23,11 +23,10 @@ public class Account(IMediator mediator) : ControllerBase
 
         return Ok();
     }
-    
+
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequestViewModel loginRequest)
     {
-            
         try
         {
             var token = await mediator.Send(loginRequest.Convert());
@@ -39,5 +38,4 @@ public class Account(IMediator mediator) : ControllerBase
             return Unauthorized(ex.Message);
         }
     }
-
 }
