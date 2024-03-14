@@ -7,7 +7,7 @@ public class CloneEventRequestViewModel: IRequest<CloneEventCommand>
 {
     public string EventId { get; set; }
     public string InstitutionId { get; set; }
-    public DateTime Date { get; set; }
+    public DateOnly Date { get; set; }
     public string Location { get; set; }
     public CloneEventCommand Convert()
     {
@@ -15,7 +15,7 @@ public class CloneEventRequestViewModel: IRequest<CloneEventCommand>
         {
             EventId = EventId,
             InstitutionId = InstitutionId,
-            Date = Date,
+            Date = new DateTime(Date,new TimeOnly()),
             Location = Location
         };
     }

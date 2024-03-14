@@ -5,6 +5,7 @@ namespace Core.Services.Institution.Common;
 
 public class InstitutionDto
 {
+    public string Id { get; set; }
     public string Name { get; set; }
     public InstitutionType Type { get; set; }
     public string District { get; set; }
