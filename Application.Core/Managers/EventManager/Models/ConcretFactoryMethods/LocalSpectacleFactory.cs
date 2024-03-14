@@ -6,11 +6,11 @@ using MediatR;
 
 namespace Application.Core.Managers.EventManager.Models.ConcretFactoryMethods;
 
-public class PuppetShowSpectacleFactory(IMediator mediator) : SpectacleAbstractFactory
+public class LocalSpectacleFactory(IMediator mediator) : SpectacleAbstractFactory
 {
     public override async Task<Spectacle> CreateSpectacle(string spectacleId)
     {
         var spectacle = await mediator.Send(new GetSpectacleByIdQuery() { SpectacleId = spectacleId });
-        return PuppetShowSpectacle.From(spectacle);
+        return LocalSpectacle.From(spectacle);
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Domain.Core.Domain.Entities;
+﻿using Domain.Core.Domain.Entities;
+using Domain.Core.Domain.Interfaces;
 using Domain.Entities.Event.Enum;
 using Domain.Entities.Institution;
 using Domain.Entities.Spectacle;
@@ -7,7 +7,7 @@ using Domain.Entities.Team;
 
 namespace Domain.Entities.Event;
 
-public class EventEntity : FullAuditEntity
+public class EventEntity : FullAuditEntity, IClone<EventEntity>
 {
     public string InstitutionId { get; set; }
     public virtual InstitutionEntity Institution { get; set; }
@@ -33,6 +33,22 @@ public class EventEntity : FullAuditEntity
             Date = date,
             Location = location,
             Status = status
+        };
+    }
+
+    public EventEntity Clone()
+    {
+        return new EventEntity()
+        {
+            InstitutionId = InstitutionId,
+            Institution = Institution,
+            TeamId = TeamId,
+            Team = Team,
+            SpectacleId = SpectacleId,
+            Spectacle = Spectacle,
+            Date = Date,
+            Location = Location,
+            Status = Status
         };
     }
 }

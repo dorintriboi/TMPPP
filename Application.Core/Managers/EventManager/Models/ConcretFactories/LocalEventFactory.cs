@@ -1,17 +1,24 @@
 ﻿using Application.Core.Managers.EventManager.Models.AbstractFactories;
 using Application.Core.Managers.EventManager.Models.AbstractModels;
+using Application.Core.Managers.EventManager.Models.ConcretFactoryMethods;
+using Application.Core.Managers.EventManager.Models.ConcretModels.Team;
+using Core.Services.Team.Queries.GetTeamBySpectacleType.DTOs;
+using Domain.Entities.Spectacle.Enum;
+using MediatR;
 
 namespace Application.Core.Managers.EventManager.Models.ConcretFactories;
 
-public class LocalEventFactory: IEventAbstractFactory
+public class LocalEventFactory(IMediator mediator): IEventAbstractFactory
 {
-    public Task<Spectacle> GetSpectacle(string spectacleId)
+    public async Task<Spectacle> GetSpectacle(string spectacleId)
     {
-        throw new NotImplementedException();
+        var factory = new LocalSpectacleFactory(mediator);
+        return await factory.CreateSpectacle(spectacleId);
     }
 
-    public Task<Team> GetTeam()
+    public async Task<Team> GetTeam()
     {
-        throw new NotImplementedException();
+        var team = await mediator.Send(new GetTeamBySpectacleTypeQuery() { Type = SpectacleType.Local });
+        return PuppetShowTeam.From(team);
     }
 }

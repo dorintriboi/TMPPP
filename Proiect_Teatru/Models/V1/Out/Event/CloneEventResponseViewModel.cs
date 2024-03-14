@@ -1,12 +1,13 @@
-﻿using Domain.Entities.Event;
+﻿using Core.Services.Event.Common;
 using Domain.Entities.Event.Enum;
 using Domain.Entities.Institution;
 using Domain.Entities.Spectacle;
 using Domain.Entities.Team;
+using Proiect_Teatru.Models.Interfaces.Out;
 
-namespace Core.Services.Event.Common;
+namespace Proiect_Teatru.Models.V1.Out.Event;
 
-public class EventDto
+public class CloneEventResponseViewModel: IResponse<CloneEventResponseViewModel,EventDto>
 {
     public string Id { get; set; }
     public virtual InstitutionEntity Institution { get; set; }
@@ -15,9 +16,12 @@ public class EventDto
     public DateTimeOffset Date { get; set; }
     public string Location { get; set; }
     public EventStatusType Status { get; set; }
-    public static EventDto From(EventEntity entity)
+    
+    public static IResponse<CloneEventResponseViewModel, EventDto> Convert(EventDto entity)
     {
-        return new EventDto()
+        if (entity is null) return null;
+        
+        return new CloneEventResponseViewModel()
         {
             Id = entity.Id,
             Institution = entity.Institution,

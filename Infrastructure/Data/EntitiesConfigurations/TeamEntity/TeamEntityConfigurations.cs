@@ -16,5 +16,10 @@ public class TeamEntityConfigurations: IEntityTypeConfiguration<Domain.Entities.
             .WithOne(x => x.Team)
             .HasForeignKey(x => x.TeamId)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasMany(a => a.Spectacles)
+            .WithOne(x => x.Team)
+            .HasForeignKey(x => x.TeamId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

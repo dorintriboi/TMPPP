@@ -6,5 +6,6 @@ public enum EventStatusType
     Played = 1,
     Postponed = 2,
     Cancelled = 3,
-    Outstanding = 4
+    Outstanding = 4,
+    Created = 5
 }

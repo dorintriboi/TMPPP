@@ -1,9 +1,8 @@
-﻿using Application.Core.Managers.EventManager.Models.AbstractModels;
-using Core.Services.Spectacle.Common;
+﻿using Core.Services.Spectacle.Common;
 
-namespace Application.Core.Managers.EventManager.Models.ConcretModels;
+namespace Application.Core.Managers.EventManager.Models.ConcretModels.Spectacle;
 
-public class PuppetShowSpectacle : Spectacle
+public class PuppetShowSpectacle : AbstractModels.Spectacle
 {
     public static PuppetShowSpectacle From(SpectacleDto dto)
     {

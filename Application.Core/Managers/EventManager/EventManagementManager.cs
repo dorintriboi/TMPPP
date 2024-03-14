@@ -20,11 +20,16 @@ public class EventManagementManager: IEventManagementManager
     {
         var eventFactory = new PuppetShowEventFactory(_mediator);
         var abstractEvent = new Event(eventFactory);
-        var concretEvent = await abstractEvent.CreateEvent(model.SpectacleId, model.Date);
+        var concretEvent = await abstractEvent.CreateEvent(model.SpectacleId, model.Location, model.Date);
 
         var result = await _mediator.Send(new CreateEventCommand()
         {
-            InstitutionId = concretEvent.Spectacle.Id
+            InstitutionId = model.InstitutionId,
+            TeamId = concretEvent.Team.Id, 
+            SpectacleId = concretEvent.Spectacle.Id, 
+            Date = concretEvent.Date, 
+            Location = concretEvent.Location,
+            Status = concretEvent.Status
         });
 
         return EventResponseModel.From(result);
@@ -35,13 +40,41 @@ public class EventManagementManager: IEventManagementManager
         throw new NotImplementedException();
     }
 
-    public Task<EventResponseModel> CreateLocalEvent(EventRequestModel model)
+    public async Task<EventResponseModel> CreateLocalEvent(EventRequestModel model)
     {
-        throw new NotImplementedException();
+        var eventFactory = new LocalEventFactory(_mediator);
+        var abstractEvent = new Event(eventFactory);
+        var concretEvent = await abstractEvent.CreateEvent(model.SpectacleId, model.Location, model.Date);
+
+        var result = await _mediator.Send(new CreateEventCommand()
+        {
+            InstitutionId = model.InstitutionId,
+            TeamId = concretEvent.Team.Id, 
+            SpectacleId = concretEvent.Spectacle.Id, 
+            Date = concretEvent.Date, 
+            Location = concretEvent.Location,
+            Status = concretEvent.Status
+        });
+
+        return EventResponseModel.From(result);
     }
 
-    public Task<EventResponseModel> CreateClowningEvent(EventRequestModel model)
+    public async Task<EventResponseModel> CreateClowningEvent(EventRequestModel model)
     {
-        throw new NotImplementedException();
+        var eventFactory = new ClowningEventFactory(_mediator);
+        var abstractEvent = new Event(eventFactory);
+        var concretEvent = await abstractEvent.CreateEvent(model.SpectacleId, model.Location, model.Date);
+
+        var result = await _mediator.Send(new CreateEventCommand()
+        {
+            InstitutionId = model.InstitutionId,
+            TeamId = concretEvent.Team.Id, 
+            SpectacleId = concretEvent.Spectacle.Id, 
+            Date = concretEvent.Date, 
+            Location = concretEvent.Location,
+            Status = concretEvent.Status
+        });
+
+        return EventResponseModel.From(result);
     }
 }

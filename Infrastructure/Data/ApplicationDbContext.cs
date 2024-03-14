@@ -5,6 +5,7 @@ using Domain.Entities.EmployeeSalary;
 using Domain.Entities.Event;
 using Domain.Entities.Institution;
 using Domain.Entities.Spectacle;
+using Domain.Entities.SpectacleTeam;
 using Domain.Entities.Team;
 using Domain.Entities.TeamMember;
 using Domain.Entities.User;
@@ -112,4 +113,5 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity, IdentityRole<s
     public DbSet<TeamEntity> Teams { get; set; }
     public DbSet<TeamMemberEntity> TeamsMembers { get; set; }
     public DbSet<UserEntity> Users { get; set; }
+    public DbSet<SpectacleTeamEntity> SpectacleTeams { get; set; }
 }

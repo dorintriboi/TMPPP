@@ -303,6 +303,38 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SpectacleTeams",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TeamId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    SpectacleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CreationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    CreatorUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModifierUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModificationTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: true),
+                    DeleterUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeletionTime = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SpectacleTeams", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SpectacleTeams_Spectacles_SpectacleId",
+                        column: x => x.SpectacleId,
+                        principalTable: "Spectacles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SpectacleTeams_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EmployeeSalaries",
                 columns: table => new
                 {
@@ -374,7 +406,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreationTime", "CreatorUserId", "DeleterUserId", "DeletionTime", "Email", "EmailConfirmed", "EmployeeId", "FirstName", "IsDeleted", "LastModificationTime", "LastModifierUserId", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "02ccf5fd-ce71-45a7-a373-ea49c807d67b", 0, "a32c28ee-31b6-4b7a-8c01-21d0e5d6d071", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@admin.com", false, null, "Admin", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), null, "Admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AL8qWPhv0ySMra56hmzlMwKcl1xGfo97SYVXtvb8B98DPSbNadeepgYNkW1L34MMrw==", "000000000", false, null, false, "admin@admin.com" });
+                values: new object[] { "02ccf5fd-ce71-45a7-a373-ea49c807d67b", 0, "ea8941a9-54e3-409e-b5f3-fc4b11da916a", new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), null, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "admin@admin.com", false, null, "Admin", null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), null, "Admin", false, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "APO+WqoFiMlSzB3XhRjr09MWc/7qjKuvuUJwsSDYoK1nLaJJSQwEYZnh97MpYRiCiA==", "000000000", false, null, false, "admin@admin.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -454,6 +486,16 @@ namespace Infrastructure.Migrations
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SpectacleTeams_SpectacleId",
+                table: "SpectacleTeams",
+                column: "SpectacleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SpectacleTeams_TeamId",
+                table: "SpectacleTeams",
+                column: "TeamId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TeamsMembers_EmployeeId",
                 table: "TeamsMembers",
                 column: "EmployeeId");
@@ -487,6 +529,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Events");
+
+            migrationBuilder.DropTable(
+                name: "SpectacleTeams");
 
             migrationBuilder.DropTable(
                 name: "TeamsMembers");

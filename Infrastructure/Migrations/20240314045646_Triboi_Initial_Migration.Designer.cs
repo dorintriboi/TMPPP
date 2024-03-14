@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240310203100_Triboi_Initial_Migration")]
+    [Migration("20240314045646_Triboi_Initial_Migration")]
     partial class Triboi_Initial_Migration
     {
         /// <inheritdoc />
@@ -274,6 +274,49 @@ namespace Infrastructure.Migrations
                     b.ToTable("Spectacles");
                 });
 
+            modelBuilder.Entity("Domain.Entities.SpectacleTeam.SpectacleTeamEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTimeOffset>("CreationTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeleterUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("DeletionTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset>("LastModificationTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("LastModifierUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SpectacleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("TeamId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpectacleId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("SpectacleTeams");
+                });
+
             modelBuilder.Entity("Domain.Entities.Team.TeamEntity", b =>
                 {
                     b.Property<string>("Id")
@@ -460,7 +503,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = "02ccf5fd-ce71-45a7-a373-ea49c807d67b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a32c28ee-31b6-4b7a-8c01-21d0e5d6d071",
+                            ConcurrencyStamp = "ea8941a9-54e3-409e-b5f3-fc4b11da916a",
                             CreationTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             DeletionTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             Email = "admin@admin.com",
@@ -471,7 +514,7 @@ namespace Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AL8qWPhv0ySMra56hmzlMwKcl1xGfo97SYVXtvb8B98DPSbNadeepgYNkW1L34MMrw==",
+                            PasswordHash = "APO+WqoFiMlSzB3XhRjr09MWc/7qjKuvuUJwsSDYoK1nLaJJSQwEYZnh97MpYRiCiA==",
                             PhoneNumber = "000000000",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
@@ -682,6 +725,25 @@ namespace Infrastructure.Migrations
                     b.Navigation("Team");
                 });
 
+            modelBuilder.Entity("Domain.Entities.SpectacleTeam.SpectacleTeamEntity", b =>
+                {
+                    b.HasOne("Domain.Entities.Spectacle.SpectacleEntity", "Spectacle")
+                        .WithMany("Teams")
+                        .HasForeignKey("SpectacleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Team.TeamEntity", "Team")
+                        .WithMany("Spectacles")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Spectacle");
+
+                    b.Navigation("Team");
+                });
+
             modelBuilder.Entity("Domain.Entities.TeamMember.TeamMemberEntity", b =>
                 {
                     b.HasOne("Domain.Entities.Employee.EmployeeEntity", "Employee")
@@ -767,6 +829,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Spectacle.SpectacleEntity", b =>
                 {
                     b.Navigation("Events");
+
+                    b.Navigation("Teams");
                 });
 
             modelBuilder.Entity("Domain.Entities.Team.TeamEntity", b =>
@@ -774,6 +838,8 @@ namespace Infrastructure.Migrations
                     b.Navigation("Events");
 
                     b.Navigation("Members");
+
+                    b.Navigation("Spectacles");
                 });
 
             modelBuilder.Entity("Domain.Entities.User.UserEntity", b =>
