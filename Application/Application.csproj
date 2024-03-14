@@ -12,7 +12,7 @@
       <Folder Include="ExternalServices\" />
       <Folder Include="Services\Account\Common\" />
       <Folder Include="Services\Event\Queries\" />
-      <Folder Include="Services\Spectacle\Commands\" />
+      <Folder Include="Services\Institution\Queries\" />
       <Folder Include="Services\Team\Queries\" />
     </ItemGroup>
 

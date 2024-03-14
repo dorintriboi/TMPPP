@@ -10,4 +10,14 @@ public class SpectacleEntity : FullAuditEntity
     public string Description { get; set; }
     public SpectacleType Type { get; set; }
     public virtual ICollection<EventEntity> Events { get; set; }
+
+    public static SpectacleEntity Create(string name, string description, SpectacleType type)
+    {
+        return new SpectacleEntity()
+        {
+            Name = name,
+            Description = description,
+            Type = type
+        };
+    }
 }

@@ -18,4 +18,21 @@ public class EventEntity : FullAuditEntity
     public DateTimeOffset Date { get; set; }
     public string Location { get; set; }
     public EventStatusType Status { get; set; }
+
+    public static EventEntity Create(InstitutionEntity institution, TeamEntity team, SpectacleEntity spectacle, DateTime date,
+        string location, EventStatusType status)
+    {
+        return new EventEntity()
+        {
+            InstitutionId = institution.Id,
+            Institution = institution,
+            TeamId = team.Id,
+            Team = team,
+            SpectacleId = spectacle.Id,
+            Spectacle = spectacle,
+            Date = date,
+            Location = location,
+            Status = status
+        };
+    }
 }

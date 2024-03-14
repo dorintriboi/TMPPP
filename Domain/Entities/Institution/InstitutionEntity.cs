@@ -15,4 +15,20 @@ public class InstitutionEntity : FullAuditEntity
     public string Email { get; set; }
     public string? Director { get; set; }
     public virtual ICollection<EventEntity> Events { get; set; }
+
+    public static InstitutionEntity Create(string name, InstitutionType type, string distrinct, string locality,
+        string address, string phone, string email, string? director)
+    {
+        return new InstitutionEntity
+        {
+            Name = name,
+            Type = type,
+            District = distrinct,
+            Locality = locality,
+            Address = address,
+            Phone = phone,
+            Email = email,
+            Director = director
+        };
+    }
 }
