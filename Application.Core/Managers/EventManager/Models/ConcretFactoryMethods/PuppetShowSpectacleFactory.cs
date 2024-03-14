@@ -1,13 +1,16 @@
 ﻿using Application.Core.Managers.EventManager.Models.AbstractFactoryMethods;
 using Application.Core.Managers.EventManager.Models.AbstractModels;
-using Domain.Entities.Spectacle.Enum;
+using Application.Core.Managers.EventManager.Models.ConcretModels;
+using Core.Services.Spectacle.Queries.GetSpectacleById.DTOs;
+using MediatR;
 
 namespace Application.Core.Managers.EventManager.Models.ConcretFactoryMethods;
 
-public class PuppetShowSpectacleFactory : SpectacleAbstractFactory
+public class PuppetShowSpectacleFactory(IMediator mediator) : SpectacleAbstractFactory
 {
-    public override Spectacle CreateSpectacle(SpectacleType type)
+    public override async Task<Spectacle> CreateSpectacle(string spectacleId)
     {
-        throw new NotImplementedException();
+        var spectacle = await mediator.Send(new GetSpectacleByIdQuery() { SpectacleId = spectacleId });
+        return PuppetShowSpectacle.From(spectacle);
     }
 }

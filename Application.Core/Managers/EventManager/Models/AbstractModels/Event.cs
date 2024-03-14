@@ -2,23 +2,18 @@
 
 namespace Application.Core.Managers.EventManager.Models.AbstractModels;
 
-public class Event
+public class Event(IEventAbstractFactory factory)
 {
-    private IEventAbstractFactory Factory { get; set; }
+    private IEventAbstractFactory Factory { get; set; } = factory;
 
-    public Event(IEventAbstractFactory factory)
-    {
-        Factory = factory;
-    }
-    
     public Spectacle Spectacle { get; set; }
     public Team Team { get; set; }
     public DateTime Date { get; set; }
 
-    public Event CreateEvent(DateTime date)
+    public async Task<Event> CreateEvent(string spectacleId, DateTime date)
     {
-        Spectacle = Factory.CreateSpectacle();
-        Team = Factory.CreateTeam();
+        Spectacle = await Factory.GetSpectacle(spectacleId);
+        Team = await Factory.GetTeam();
         Date = date;
         
         return this;

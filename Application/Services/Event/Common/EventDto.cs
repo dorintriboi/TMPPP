@@ -1,12 +1,12 @@
-﻿using Core.Services.Event.Common;
+﻿using Domain.Entities.Event;
 using Domain.Entities.Event.Enum;
 using Domain.Entities.Institution;
 using Domain.Entities.Spectacle;
 using Domain.Entities.Team;
 
-namespace Application.Core.Managers.EventManager.Models.Out;
+namespace Core.Services.Event.Common;
 
-public class EventResponseModel
+public class EventDto
 {
     public virtual InstitutionEntity Institution { get; set; }
     public virtual TeamEntity Team { get; set; }
@@ -14,17 +14,16 @@ public class EventResponseModel
     public DateTimeOffset Date { get; set; }
     public string Location { get; set; }
     public EventStatusType Status { get; set; }
-    
-    public static EventResponseModel From(EventDto dto)
+    public static EventDto From(EventEntity entity)
     {
-        return new EventResponseModel()
+        return new EventDto()
         {
-            Institution = dto.Institution,
-            Team = dto.Team,
-            Spectacle = dto.Spectacle,
-            Date = dto.Date,
-            Location = dto.Location,
-            Status = dto.Status
+            Institution = entity.Institution,
+            Team = entity.Team,
+            Spectacle = entity.Spectacle,
+            Date = entity.Date,
+            Location = entity.Location,
+            Status = entity.Status
         };
     }
 }

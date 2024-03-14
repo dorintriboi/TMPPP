@@ -5,5 +5,8 @@ namespace Application.Core.Managers.EventManager.Interfaces;
 
 public interface IEventManagementManager
 {
-    Task<EventResponseModel> CreateEvent(EventRequestModel model);
+    Task<EventResponseModel> CreatePuppetShowEvent(EventRequestModel model);
+    Task<EventResponseModel> CreateEducationalEvent(EventRequestModel model);
+    Task<EventResponseModel> CreateLocalEvent(EventRequestModel model);
+    Task<EventResponseModel> CreateClowningEvent(EventRequestModel model);
 }

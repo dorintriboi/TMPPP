@@ -1,5 +1,7 @@
 using System.Reflection;
 using Application.Core.Configuration;
+using Application.Core.Managers.EventManager;
+using Application.Core.Managers.EventManager.Interfaces;
 using Core.Services.Team.Commands.CreateTeam;
 using Domain.Entities.User;
 using FluentValidation;
@@ -50,7 +52,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddScoped(cfg => cfg.GetRequiredService<IOptions<AuthOptions>>().Value);
+builder.Services.AddSingleton(cfg => cfg.GetRequiredService<IOptions<AuthOptions>>().Value);
 
 builder.Services.AddIdentity<UserEntity, IdentityRole<string>>(
         options =>
@@ -153,6 +155,8 @@ builder.Services.AddTransient<IInstitutionRepository, InstitutionRepository>();
 builder.Services.AddTransient<ISpectacleRepository, SpectacleRepository>();
 builder.Services.AddTransient<ITeamRepository, TeamRepository>();
 builder.Services.AddTransient<ITeamMemberRepository, TeamMemberRepository>();
+
+builder.Services.AddScoped<IEventManagementManager, EventManagementManager>();
 
 builder.Services.AddHttpContextAccessor();
 

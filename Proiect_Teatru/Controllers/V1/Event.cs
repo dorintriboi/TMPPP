@@ -1,21 +1,20 @@
-﻿using MediatR;
+﻿using Application.Core.Managers.EventManager.Interfaces;
+using Application.Core.Managers.EventManager.Models.In;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Proiect_Teatru.Models.V1.In.Team;
-using Proiect_Teatru.Models.V1.Out.Team;
+using Proiect_Teatru.Models.V1.Out.Event;
 
 namespace Proiect_Teatru.Controllers.V1;
 
 [ApiController]
 [Route("[controller]")]
-public class Event(IMediator mediator) : ControllerBase
+public class Event(IEventManagementManager menager) : ControllerBase
 {
-
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult?> CreateEvent(CreateTeamRequestViewModel request)
+    public async Task<IActionResult?> CreatePuppetShowEvent(EventRequestModel request)
     {
-        var ceva = await mediator.Send(request.Convert());
-        return Ok(CreateTeamResponseViewModel.Convert(ceva));
+        var ceva = await menager.CreatePuppetShowEvent(request);
+        return Ok(CreateEventResponseViewModel.Convert(ceva));
     }
 }

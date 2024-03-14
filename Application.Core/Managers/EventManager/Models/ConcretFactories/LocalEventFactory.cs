@@ -5,12 +5,12 @@ namespace Application.Core.Managers.EventManager.Models.ConcretFactories;
 
 public class LocalEventFactory: IEventAbstractFactory
 {
-    public Spectacle CreateSpectacle()
+    public Task<Spectacle> GetSpectacle(string spectacleId)
     {
         throw new NotImplementedException();
     }
 
-    public Team CreateTeam()
+    public Task<Team> GetTeam()
     {
         throw new NotImplementedException();
     }
