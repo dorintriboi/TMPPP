@@ -6,11 +6,11 @@ namespace Core.Services.Account.Queries.Login.DTOs;
 
 public class LoginQuery: BaseMediatorDtoValidation<LoginQuery>, IRequest<string>
 {
-    public string Username { get; set; }
+    public string Email { get; set; }
     public string Password { get; set; }
     protected override void Validation()
     {
-        RuleFor(x => x.Username)
+        RuleFor(x => x.Email)
             .NotEmpty()
             .WithMessage("Name most be not null");
         

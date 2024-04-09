@@ -12,7 +12,7 @@ public class LocalEventFactory(IMediator mediator): IEventAbstractFactory
 {
     public async Task<Spectacle> GetSpectacle(string spectacleId)
     {
-        var factory = new LocalSpectacleFactory(mediator);
+        var factory = new LocalSpectacleFactoryMethod(mediator);
         return await factory.CreateSpectacle(spectacleId);
     }
 

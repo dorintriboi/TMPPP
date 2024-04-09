@@ -4,6 +4,9 @@ using Domain.Entities.Employee;
 using Domain.Entities.EmployeeSalary;
 using Domain.Entities.Event;
 using Domain.Entities.Institution;
+using Domain.Entities.Music;
+using Domain.Entities.Playlist;
+using Domain.Entities.PlaylistMusic;
 using Domain.Entities.Spectacle;
 using Domain.Entities.SpectacleTeam;
 using Domain.Entities.Team;
@@ -114,4 +117,8 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity, IdentityRole<s
     public DbSet<TeamMemberEntity> TeamsMembers { get; set; }
     public DbSet<UserEntity> Users { get; set; }
     public DbSet<SpectacleTeamEntity> SpectacleTeams { get; set; }
+    public DbSet<MusicEntity> Musics { get; set; }
+    public DbSet<PlaylistEntity> Playlists { get; set; }
+    public DbSet<PlaylistMusicEntity> MusicPlaylists { get; set; }
+    
 }

@@ -1,7 +1,7 @@
 using System.Reflection;
-using Application.Core.Configuration;
 using Application.Core.Managers.EventManager;
 using Application.Core.Managers.EventManager.Interfaces;
+using Core.Configuration;
 using Core.Services.Team.Commands.CreateTeam;
 using Domain.Entities.User;
 using FluentValidation;
@@ -31,6 +31,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -152,10 +153,10 @@ builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<IEmployeeSalaryRepository, EmployeeSalaryRepository>();
 builder.Services.AddTransient<IEventRepository, EventRepository>();
 builder.Services.AddTransient<IInstitutionRepository, InstitutionRepository>();
-builder.Services.AddTransient<ISpectacleRepository, SpectacleRepository>();
+builder.Services.AddTransient<ISpectacleRepository, CacheSpectacleRepository>();
+builder.Services.AddTransient<SpectacleRepository>();
 builder.Services.AddTransient<ITeamRepository, TeamRepository>();
 builder.Services.AddTransient<ITeamMemberRepository, TeamMemberRepository>();
-
 builder.Services.AddScoped<IEventManagementManager, EventManagementManager>();
 
 builder.Services.AddHttpContextAccessor();
@@ -178,7 +179,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseHttpMetrics();
+app.UseHttpMetrics();
 app.MapControllers();
 
 app.Run();

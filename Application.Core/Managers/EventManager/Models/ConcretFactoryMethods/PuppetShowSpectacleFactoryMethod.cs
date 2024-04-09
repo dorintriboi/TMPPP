@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.Core.Managers.EventManager.Models.ConcretFactoryMethods;
 
-public class PuppetShowSpectacleFactory(IMediator mediator) : SpectacleAbstractFactory
+public class PuppetShowSpectacleFactoryMethod(IMediator mediator) : SpectacleAbstractFactoryMethod
 {
     public override async Task<Spectacle> CreateSpectacle(string spectacleId)
     {

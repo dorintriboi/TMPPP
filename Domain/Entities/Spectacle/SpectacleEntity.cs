@@ -1,5 +1,6 @@
 ﻿using Domain.Core.Domain.Entities;
 using Domain.Entities.Event;
+using Domain.Entities.Playlist;
 using Domain.Entities.Spectacle.Enum;
 using Domain.Entities.SpectacleTeam;
 
@@ -12,7 +13,9 @@ public class SpectacleEntity : FullAuditEntity
     public SpectacleType Type { get; set; }
     public virtual ICollection<EventEntity> Events { get; set; }
     public virtual ICollection<SpectacleTeamEntity> Teams { get; set; }
-
+    public string PlaylistId { get; set; }
+    public virtual PlaylistEntity Playlist { get; set; }
+    
     public static SpectacleEntity Create(string name, string description, SpectacleType type)
     {
         return new SpectacleEntity()

@@ -12,7 +12,7 @@ public class PuppetShowEventFactory(IMediator mediator): IEventAbstractFactory
 {
     public async Task<Spectacle> GetSpectacle(string spectacleId)
     {
-        var factory = new PuppetShowSpectacleFactory(mediator);
+        var factory = new PuppetShowSpectacleFactoryMethod(mediator);
         return await factory.CreateSpectacle(spectacleId);
     }
 

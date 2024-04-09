@@ -1,6 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Application.Core.Configuration;
+using Core.Configuration;
 using Core.Services.Account.Queries.Login.DTOs;
 using Domain.Entities.User;
 using MediatR;
@@ -15,7 +15,7 @@ public class LoginHandler(
 {
     public async Task<string> Handle(LoginQuery request, CancellationToken cancellationToken)
     {
-        var user = await userManager.FindByEmailAsync(request.Username);
+        var user = await userManager.FindByEmailAsync(request.Email);
         if (user == null)
         {
             var errorMessage = "Login failed - Nu such username in database";

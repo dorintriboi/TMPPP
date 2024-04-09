@@ -35,9 +35,23 @@ public class EventManagementManager: IEventManagementManager
         return EventResponseModel.From(result);
     }
 
-    public Task<EventResponseModel> CreateEducationalEvent(EventRequestModel model)
+    public async Task<EventResponseModel> CreateEducationalEvent(EventRequestModel model)
     {
-        throw new NotImplementedException();
+        var eventFactory = new EducationalEventFactory(_mediator);
+        var abstractEvent = new Event(eventFactory);
+        var concretEvent = await abstractEvent.CreateEvent(model.SpectacleId, model.Location, model.Date);
+
+        var result = await _mediator.Send(new CreateEventCommand()
+        {
+            InstitutionId = model.InstitutionId,
+            TeamId = concretEvent.Team.Id, 
+            SpectacleId = concretEvent.Spectacle.Id, 
+            Date = concretEvent.Date, 
+            Location = concretEvent.Location,
+            Status = concretEvent.Status
+        });
+
+        return EventResponseModel.From(result);
     }
 
     public async Task<EventResponseModel> CreateLocalEvent(EventRequestModel model)

@@ -2,7 +2,7 @@
 
 namespace Application.Core.Managers.EventManager.Models.AbstractFactoryMethods;
 
-public abstract class SpectacleAbstractFactory
+public abstract class SpectacleAbstractFactoryMethod
 {
     public abstract Task<Spectacle> CreateSpectacle(string spectacleId);
 }

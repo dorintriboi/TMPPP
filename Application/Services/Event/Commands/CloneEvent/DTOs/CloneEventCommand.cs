@@ -15,18 +15,18 @@ public class CloneEventCommand: BaseMediatorDtoValidation<CloneEventCommand>, IR
     {
         RuleFor(x => x.EventId)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("EventId most be not null");
         
         RuleFor(x => x.InstitutionId)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("InstitutionId most be not null");
         
         RuleFor(x => x.Location)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Location most be not null");
         
         RuleFor(x => x.Date)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Date most be not null");
     }
 }

@@ -46,7 +46,7 @@ public class Event(IEventManagementManager menager, IMediator mediator) : Contro
     
     [HttpPost("clone")]
     [Authorize]
-    public async Task<IActionResult?> CreateClowningEvent(CloneEventRequestViewModel request)
+    public async Task<IActionResult?> CreateCloneEvent(CloneEventRequestViewModel request)
     {
         return Ok(CloneEventResponseViewModel.Convert(await mediator.Send(request.Convert())));
     }

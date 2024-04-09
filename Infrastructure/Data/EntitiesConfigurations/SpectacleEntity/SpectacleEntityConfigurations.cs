@@ -16,5 +16,10 @@ public class SpectacleEntityConfigurations: IEntityTypeConfiguration<Domain.Enti
             .WithOne(x => x.Spectacle)
             .HasForeignKey(x => x.SpectacleId)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder.HasOne(a => a.Playlist)
+            .WithMany(x => x.Spectales)
+            .HasForeignKey(x => x.PlaylistId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

@@ -25,26 +25,26 @@ public class CreateInstitutionCommand : BaseMediatorDtoValidation<CreateInstitut
 
         RuleFor(x => x.Type)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Type most be not null");
 
         RuleFor(x => x.District)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("District most be not null");
 
         RuleFor(x => x.Locality)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Locality most be not null");
 
         RuleFor(x => x.Address)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Address most be not null");
 
         RuleFor(x => x.Phone)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Phone most be not null");
 
         RuleFor(x => x.Email)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Email most be not null");
     }
 }

@@ -18,6 +18,7 @@ public class InstitutionDto
     {
         return new InstitutionDto()
         {
+            Id = entity.Id,
             Name = entity.Name,
             Type = entity.Type,
             District = entity.District,

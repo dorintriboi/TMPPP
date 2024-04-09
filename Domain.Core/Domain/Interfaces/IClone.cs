@@ -1,6 +1,8 @@
-﻿namespace Domain.Core.Domain.Interfaces;
+﻿using Domain.Core.Domain.Entities;
 
-public interface IClone<T>
+namespace Domain.Core.Domain.Interfaces;
+
+public interface IClone<T> where T: Entity
 {
     T Clone();
 }

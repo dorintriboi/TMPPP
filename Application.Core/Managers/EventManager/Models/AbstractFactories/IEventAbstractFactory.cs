@@ -1,5 +1,4 @@
 ﻿using Application.Core.Managers.EventManager.Models.AbstractModels;
-using MediatR;
 
 namespace Application.Core.Managers.EventManager.Models.AbstractFactories;
 

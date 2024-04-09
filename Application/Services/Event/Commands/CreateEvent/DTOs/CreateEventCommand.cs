@@ -14,30 +14,31 @@ public class CreateEventCommand: BaseMediatorDtoValidation<CreateEventCommand>, 
     public DateTimeOffset Date { get; set; }
     public string Location { get; set; }
     public EventStatusType Status { get; set; }
+    
     protected override void Validation()
     {
         RuleFor(x => x.InstitutionId)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("InstitutionId most be not null");
         
         RuleFor(x => x.TeamId)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("TeamId most be not null");
         
         RuleFor(x => x.SpectacleId)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("SpectacleId most be not null");
         
         RuleFor(x => x.Date)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Date most be not null");
         
         RuleFor(x => x.Location)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Location most be not null");
         
         RuleFor(x => x.Status)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Status most be not null");
     }
 }

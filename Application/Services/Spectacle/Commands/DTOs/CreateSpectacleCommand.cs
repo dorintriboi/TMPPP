@@ -19,10 +19,10 @@ public class CreateSpectacleCommand: BaseMediatorDtoValidation<CreateSpectacleCo
         
         RuleFor(x => x.Description)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Description most be not null");
         
         RuleFor(x => x.Type)
             .NotEmpty()
-            .WithMessage("Name most be not null");
+            .WithMessage("Type most be not null");
     }
 }
