@@ -8,6 +8,8 @@ using Infrastructure.Repositories.BusinessRepository.Event;
 using Infrastructure.Repositories.BusinessRepository.Event.Interface;
 using Infrastructure.Repositories.BusinessRepository.Institution;
 using Infrastructure.Repositories.BusinessRepository.Institution.Interface;
+using Infrastructure.Repositories.BusinessRepository.Music.Interface;
+using Infrastructure.Repositories.BusinessRepository.Playlist.Interface;
 using Infrastructure.Repositories.BusinessRepository.Spectacle;
 using Infrastructure.Repositories.BusinessRepository.Spectacle.Interface;
 using Infrastructure.Repositories.BusinessRepository.Team;
@@ -22,7 +24,8 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
     public ApplicationUnitOfWork(ApplicationDbContext context, IEmployeeRepository employeeRepository,
         IEmployeeSalaryRepository employeeSalaryRepository, IEventRepository eventRepository,
         IInstitutionRepository institutionRepository, ISpectacleRepository spectacleRepository,
-        ITeamMemberRepository teamMemberRepository, ITeamRepository teamRepository) : base(context)
+        ITeamMemberRepository teamMemberRepository, ITeamRepository teamRepository,
+        IPlaylistRepository playlistRepository, IMusicRepository musicRepository) : base(context)
     {
         EmployeeRepository = employeeRepository;
         EmployeeSalaryRepository = employeeSalaryRepository;
@@ -31,6 +34,8 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
         SpectacleRepository = spectacleRepository;
         TeamRepository = teamRepository;
         TeamMemberRepository = teamMemberRepository;
+        PlaylistRepository = playlistRepository;
+        MusicRepository = musicRepository;
     }
 
     public IEmployeeRepository EmployeeRepository { get; }
@@ -46,6 +51,8 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
     public ITeamRepository TeamRepository { get; }
 
     public ITeamMemberRepository TeamMemberRepository { get; }
+    public IPlaylistRepository PlaylistRepository { get; }
+    public IMusicRepository MusicRepository { get; }
 
     public IAccountGenericRepository GetType<TType>(TType type)
     {

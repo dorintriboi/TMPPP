@@ -13,6 +13,7 @@
       <Folder Include="Services\Account\Common\" />
       <Folder Include="Services\Event\Queries\" />
       <Folder Include="Services\Institution\Queries\" />
+      <Folder Include="Services\Playlist\Queries\" />
     </ItemGroup>
 
     <ItemGroup>

@@ -7,6 +7,8 @@ using Infrastructure.Repositories.BusinessRepository.Event;
 using Infrastructure.Repositories.BusinessRepository.Event.Interface;
 using Infrastructure.Repositories.BusinessRepository.Institution;
 using Infrastructure.Repositories.BusinessRepository.Institution.Interface;
+using Infrastructure.Repositories.BusinessRepository.Music.Interface;
+using Infrastructure.Repositories.BusinessRepository.Playlist.Interface;
 using Infrastructure.Repositories.BusinessRepository.Spectacle;
 using Infrastructure.Repositories.BusinessRepository.Spectacle.Interface;
 using Infrastructure.Repositories.BusinessRepository.Team;
@@ -25,5 +27,7 @@ public interface IApplicationUnitOfWork : IUnitOfWork
     ISpectacleRepository SpectacleRepository { get; }
     ITeamRepository TeamRepository { get; }
     ITeamMemberRepository TeamMemberRepository { get; }
+    IPlaylistRepository PlaylistRepository { get; }
+    IMusicRepository MusicRepository { get; }
     IAccountGenericRepository GetType<TType>(TType type);
 }
