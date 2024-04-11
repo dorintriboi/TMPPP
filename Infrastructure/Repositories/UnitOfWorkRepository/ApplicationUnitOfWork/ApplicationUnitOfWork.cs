@@ -1,5 +1,6 @@
 using Infrastructure.Data;
 using Infrastructure.Repositories.AccountRepository.AccountGenericRepository;
+using Infrastructure.Repositories.BusinessRepository.Contract.Interface;
 using Infrastructure.Repositories.BusinessRepository.Employee;
 using Infrastructure.Repositories.BusinessRepository.Employee.Interface;
 using Infrastructure.Repositories.BusinessRepository.EmployeeSalary;
@@ -25,7 +26,8 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
         IEmployeeSalaryRepository employeeSalaryRepository, IEventRepository eventRepository,
         IInstitutionRepository institutionRepository, ISpectacleRepository spectacleRepository,
         ITeamMemberRepository teamMemberRepository, ITeamRepository teamRepository,
-        IPlaylistRepository playlistRepository, IMusicRepository musicRepository) : base(context)
+        IPlaylistRepository playlistRepository, IMusicRepository musicRepository,
+        IContractRepository contractRepository) : base(context)
     {
         EmployeeRepository = employeeRepository;
         EmployeeSalaryRepository = employeeSalaryRepository;
@@ -36,6 +38,7 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
         TeamMemberRepository = teamMemberRepository;
         PlaylistRepository = playlistRepository;
         MusicRepository = musicRepository;
+        ContractRepository = contractRepository;
     }
 
     public IEmployeeRepository EmployeeRepository { get; }
@@ -53,6 +56,7 @@ public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
     public ITeamMemberRepository TeamMemberRepository { get; }
     public IPlaylistRepository PlaylistRepository { get; }
     public IMusicRepository MusicRepository { get; }
+    public IContractRepository ContractRepository { get; }
 
     public IAccountGenericRepository GetType<TType>(TType type)
     {

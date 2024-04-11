@@ -1,4 +1,5 @@
 using Infrastructure.Repositories.AccountRepository.AccountGenericRepository;
+using Infrastructure.Repositories.BusinessRepository.Contract.Interface;
 using Infrastructure.Repositories.BusinessRepository.Employee;
 using Infrastructure.Repositories.BusinessRepository.Employee.Interface;
 using Infrastructure.Repositories.BusinessRepository.EmployeeSalary;
@@ -29,5 +30,6 @@ public interface IApplicationUnitOfWork : IUnitOfWork
     ITeamMemberRepository TeamMemberRepository { get; }
     IPlaylistRepository PlaylistRepository { get; }
     IMusicRepository MusicRepository { get; }
+    IContractRepository ContractRepository { get; }
     IAccountGenericRepository GetType<TType>(TType type);
 }

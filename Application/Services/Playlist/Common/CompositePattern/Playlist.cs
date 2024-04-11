@@ -1,5 +1,5 @@
 ﻿
-namespace Core.Services.Playlist.Common.CommandPattern;
+namespace Core.Services.Playlist.Common.CompositePattern;
 
 public class Playlist(string name) : IPlaylistComponent
 {

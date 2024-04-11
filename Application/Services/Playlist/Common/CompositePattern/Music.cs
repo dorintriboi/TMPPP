@@ -1,4 +1,4 @@
-﻿namespace Core.Services.Playlist.Common.CommandPattern;
+﻿namespace Core.Services.Playlist.Common.CompositePattern;
 
 public class Music(string name, string base64) : IPlaylistComponent
 {

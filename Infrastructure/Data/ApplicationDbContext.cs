@@ -1,5 +1,6 @@
 ﻿using System.Web.Helpers;
 using Domain.Core.Domain.Entities;
+using Domain.Entities.Contract;
 using Domain.Entities.Employee;
 using Domain.Entities.EmployeeSalary;
 using Domain.Entities.Event;
@@ -120,5 +121,6 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity, IdentityRole<s
     public DbSet<MusicEntity> Musics { get; set; }
     public DbSet<PlaylistEntity> Playlists { get; set; }
     public DbSet<PlaylistMusicEntity> MusicPlaylists { get; set; }
+    public DbSet<ContractEntity> Contracts { get; set; }
     
 }

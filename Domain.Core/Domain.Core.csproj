@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="prometheus-net.AspNetCore" Version="8.2.1" />
+      <PackageReference Include="SautinSoft.PdfVision" Version="2023.11.2" />
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 

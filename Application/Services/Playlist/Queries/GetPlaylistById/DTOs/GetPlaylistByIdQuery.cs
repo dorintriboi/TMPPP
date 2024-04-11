@@ -3,7 +3,7 @@ using Core.Validations;
 using FluentValidation;
 using MediatR;
 
-namespace Core.Services.Playlist.Command.GetPlaylistById.DTOs;
+namespace Core.Services.Playlist.Queries.GetPlaylistById.DTOs;
 
 public class GetPlaylistByIdQuery: BaseMediatorDtoValidation<GetPlaylistByIdQuery>, IRequest<PlaylistDto>
 {

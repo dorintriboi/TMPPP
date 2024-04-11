@@ -1,19 +1,18 @@
-﻿using Core.Services.Playlist.Command.GetPlaylistById.DTOs;
-using Core.Services.Playlist.Common;
-using Core.Services.Playlist.Common.CommandPattern;
+﻿using Core.Services.Playlist.Common;
+using Core.Services.Playlist.Queries.GetPlaylistById.DTOs;
 using Domain.Entities.Playlist;
 using Domain.Entities.PlaylistMusic;
 using Infrastructure.Repositories.UnitOfWorkRepository.ApplicationUnitOfWork;
 using MediatR;
 
-namespace Core.Services.Playlist.Command.GetPlaylistById;
+namespace Core.Services.Playlist.Queries.GetPlaylistById;
 
 public class GetPlaylistByIdHandler(IApplicationUnitOfWork repository) : IRequestHandler<GetPlaylistByIdQuery, PlaylistDto>
 {
     public async Task<PlaylistDto> Handle(GetPlaylistByIdQuery request, CancellationToken cancellationToken)
     {
         var playlist = await repository.PlaylistRepository.GetByIdAsync(request.PlaylistId);
-        var playlistComponent = new Common.CommandPattern.Playlist(playlist.Name);
+        var playlistComponent = new Common.CompositePattern.Playlist(playlist.Name);
         playlistComponent = await GetMusicPlaylist(playlist, playlistComponent);
 
         return new PlaylistDto()
@@ -23,14 +22,14 @@ public class GetPlaylistByIdHandler(IApplicationUnitOfWork repository) : IReques
         };
     }
 
-    private async Task<Common.CommandPattern.Playlist> GetMusicPlaylist(PlaylistEntity playlist, Common.CommandPattern.Playlist playlistComponent)
+    private async Task<Common.CompositePattern.Playlist> GetMusicPlaylist(PlaylistEntity playlist, Common.CompositePattern.Playlist playlistComponent)
     {
         foreach (var music in playlist.Music)
         {
             if (music.Type == ReferenceType.Music)
             {
                 var musicDb = await repository.MusicRepository.GetByIdAsync(music.ReferenceId);
-                var musicComponent = new Music(musicDb.Name, musicDb.Base64);
+                var musicComponent = new Common.CompositePattern.Music(musicDb.Name, musicDb.Base64);
                 playlistComponent.Add(musicComponent);
             }
             else
