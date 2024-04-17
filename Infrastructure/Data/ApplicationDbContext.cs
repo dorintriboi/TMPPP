@@ -1,7 +1,10 @@
 ﻿using System.Web.Helpers;
 using Domain.Core.Domain.Entities;
+using Domain.Entities.CompanyEvent;
+using Domain.Entities.CompanyEventType;
 using Domain.Entities.Contract;
 using Domain.Entities.Employee;
+using Domain.Entities.EmployeeCompanyEventType;
 using Domain.Entities.EmployeeSalary;
 using Domain.Entities.Event;
 using Domain.Entities.Institution;
@@ -118,9 +121,14 @@ public class ApplicationDbContext : IdentityDbContext<UserEntity, IdentityRole<s
     public DbSet<TeamMemberEntity> TeamsMembers { get; set; }
     public DbSet<UserEntity> Users { get; set; }
     public DbSet<SpectacleTeamEntity> SpectacleTeams { get; set; }
+    
     public DbSet<MusicEntity> Musics { get; set; }
     public DbSet<PlaylistEntity> Playlists { get; set; }
     public DbSet<PlaylistMusicEntity> MusicPlaylists { get; set; }
     public DbSet<ContractEntity> Contracts { get; set; }
+    
+    public DbSet<CompanyEventEntity> CompanyEvents { get; set; }
+    public DbSet<CompanyEventTypeEntity> CompanyEventTypes { get; set; }
+    public DbSet<EmployeeCompanyEventTypeEntity> EmployeeEvents { get; set; }
     
 }

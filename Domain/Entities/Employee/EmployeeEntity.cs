@@ -1,4 +1,5 @@
 ﻿using Domain.Core.Domain.Entities;
+using Domain.Entities.EmployeeCompanyEventType;
 using Domain.Entities.EmployeeSalary;
 using Domain.Entities.TeamMember;
 using Domain.Entities.User;
@@ -12,4 +13,5 @@ public class EmployeeEntity : FullAuditEntity
     public virtual UserEntity User { get; set; }
     public virtual ICollection<EmployeeSalaryEntity> EmployeeSalaries { get; set; }
     public virtual ICollection<TeamMemberEntity> Teams { get; set; }
+    public virtual ICollection<EmployeeCompanyEventTypeEntity> EventTypes { get; set; }
 }
