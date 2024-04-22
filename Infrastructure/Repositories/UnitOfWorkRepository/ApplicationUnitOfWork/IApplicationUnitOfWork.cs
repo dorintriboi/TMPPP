@@ -1,7 +1,10 @@
 using Infrastructure.Repositories.AccountRepository.AccountGenericRepository;
+using Infrastructure.Repositories.BusinessRepository.CompanyEvent.Interface;
+using Infrastructure.Repositories.BusinessRepository.CompanyEventType.Interface;
 using Infrastructure.Repositories.BusinessRepository.Contract.Interface;
 using Infrastructure.Repositories.BusinessRepository.Employee;
 using Infrastructure.Repositories.BusinessRepository.Employee.Interface;
+using Infrastructure.Repositories.BusinessRepository.EmployeeCompanyEventType.Interface;
 using Infrastructure.Repositories.BusinessRepository.EmployeeSalary;
 using Infrastructure.Repositories.BusinessRepository.EmployeeSalary.Interface;
 using Infrastructure.Repositories.BusinessRepository.Event;
@@ -28,8 +31,14 @@ public interface IApplicationUnitOfWork : IUnitOfWork
     ISpectacleRepository SpectacleRepository { get; }
     ITeamRepository TeamRepository { get; }
     ITeamMemberRepository TeamMemberRepository { get; }
+    
     IPlaylistRepository PlaylistRepository { get; }
     IMusicRepository MusicRepository { get; }
     IContractRepository ContractRepository { get; }
+    
+    ICompanyEventRepository CompanyEventRepository { get; }
+    ICompanyEventTypeRepository CompanyEventTypeRepository { get; }
+    IEmployeeCompanyEventTypeRepository EmployeeCompanyEventTypeRepository { get; }
+    
     IAccountGenericRepository GetType<TType>(TType type);
 }

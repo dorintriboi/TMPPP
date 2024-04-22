@@ -1,0 +1,6 @@
+﻿using Domain.Entities.CompanyEvent;
+using Infrastructure.Repositories.GenericRepository.FullAuditGenericRepository;
+
+namespace Infrastructure.Repositories.BusinessRepository.CompanyEvent.Interface;
+
+public interface ICompanyEventRepository: IFullAuditGenericRepository<CompanyEventEntity>;

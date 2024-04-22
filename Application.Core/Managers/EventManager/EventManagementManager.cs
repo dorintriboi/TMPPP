@@ -8,21 +8,15 @@ using MediatR;
 
 namespace Application.Core.Managers.EventManager;
 
-public class EventManagementManager: IEventManagementManager
+public class EventManagementManager(IMediator mediator) : IEventManagementManager
 {
-    private readonly IMediator _mediator;
-    public EventManagementManager(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     public async Task<EventResponseModel> CreatePuppetShowEvent(EventRequestModel model)
     {
-        var eventFactory = new PuppetShowEventFactory(_mediator);
+        var eventFactory = new PuppetShowEventFactory(mediator);
         var abstractEvent = new Event(eventFactory);
         var concretEvent = await abstractEvent.CreateEvent(model.SpectacleId, model.Location, model.Date);
 
-        var result = await _mediator.Send(new CreateEventCommand()
+        var result = await mediator.Send(new CreateEventCommand()
         {
             InstitutionId = model.InstitutionId,
             TeamId = concretEvent.Team.Id, 
@@ -37,11 +31,11 @@ public class EventManagementManager: IEventManagementManager
 
     public async Task<EventResponseModel> CreateEducationalEvent(EventRequestModel model)
     {
-        var eventFactory = new EducationalEventFactory(_mediator);
+        var eventFactory = new EducationalEventFactory(mediator);
         var abstractEvent = new Event(eventFactory);
         var concretEvent = await abstractEvent.CreateEvent(model.SpectacleId, model.Location, model.Date);
 
-        var result = await _mediator.Send(new CreateEventCommand()
+        var result = await mediator.Send(new CreateEventCommand()
         {
             InstitutionId = model.InstitutionId,
             TeamId = concretEvent.Team.Id, 
@@ -56,11 +50,11 @@ public class EventManagementManager: IEventManagementManager
 
     public async Task<EventResponseModel> CreateLocalEvent(EventRequestModel model)
     {
-        var eventFactory = new LocalEventFactory(_mediator);
+        var eventFactory = new LocalEventFactory(mediator);
         var abstractEvent = new Event(eventFactory);
         var concretEvent = await abstractEvent.CreateEvent(model.SpectacleId, model.Location, model.Date);
 
-        var result = await _mediator.Send(new CreateEventCommand()
+        var result = await mediator.Send(new CreateEventCommand()
         {
             InstitutionId = model.InstitutionId,
             TeamId = concretEvent.Team.Id, 
@@ -75,11 +69,11 @@ public class EventManagementManager: IEventManagementManager
 
     public async Task<EventResponseModel> CreateClowningEvent(EventRequestModel model)
     {
-        var eventFactory = new ClowningEventFactory(_mediator);
+        var eventFactory = new ClowningEventFactory(mediator);
         var abstractEvent = new Event(eventFactory);
         var concretEvent = await abstractEvent.CreateEvent(model.SpectacleId, model.Location, model.Date);
 
-        var result = await _mediator.Send(new CreateEventCommand()
+        var result = await mediator.Send(new CreateEventCommand()
         {
             InstitutionId = model.InstitutionId,
             TeamId = concretEvent.Team.Id, 

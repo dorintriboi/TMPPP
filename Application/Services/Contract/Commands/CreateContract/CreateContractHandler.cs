@@ -7,7 +7,8 @@ using MediatR;
 
 namespace Core.Services.Contract.Commands.CreateContract;
 
-public class CreateContractHandler(IApplicationUnitOfWork repository) : IRequestHandler<CreateContractCommand, ContractDto>
+public class CreateContractHandler
+    (IApplicationUnitOfWork repository) : IRequestHandler<CreateContractCommand, ContractDto>
 {
     public async Task<ContractDto> Handle(CreateContractCommand request, CancellationToken cancellationToken)
     {
@@ -23,7 +24,7 @@ public class CreateContractHandler(IApplicationUnitOfWork repository) : IRequest
 
         await repository.ContractRepository.InsertAsync(contract);
         await repository.SaveAsync();
-        
+
         return await ContractDto.From(contract, new PdfAdapter(new PdfConverter()));
     }
 }

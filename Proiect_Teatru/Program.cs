@@ -2,14 +2,24 @@ using System.Reflection;
 using Application.Core.Managers.EventManager;
 using Application.Core.Managers.EventManager.Interfaces;
 using Core.Configuration;
+using Core.ExternalServices.EmailConfigurations;
+using Core.ExternalServices.EmailServices;
+using Core.ExternalServices.EmailServices.Interfaces;
+using Core.ExternalServices.EmailServices.Strategy;
 using Core.Services.Team.Commands.CreateTeam;
 using Domain.Entities.User;
 using FluentValidation;
 using Infrastructure.Data;
+using Infrastructure.Repositories.BusinessRepository.CompanyEvent;
+using Infrastructure.Repositories.BusinessRepository.CompanyEvent.Interface;
+using Infrastructure.Repositories.BusinessRepository.CompanyEventType;
+using Infrastructure.Repositories.BusinessRepository.CompanyEventType.Interface;
 using Infrastructure.Repositories.BusinessRepository.Contract;
 using Infrastructure.Repositories.BusinessRepository.Contract.Interface;
 using Infrastructure.Repositories.BusinessRepository.Employee;
 using Infrastructure.Repositories.BusinessRepository.Employee.Interface;
+using Infrastructure.Repositories.BusinessRepository.EmployeeCompanyEventType;
+using Infrastructure.Repositories.BusinessRepository.EmployeeCompanyEventType.Interface;
 using Infrastructure.Repositories.BusinessRepository.EmployeeSalary;
 using Infrastructure.Repositories.BusinessRepository.EmployeeSalary.Interface;
 using Infrastructure.Repositories.BusinessRepository.Event;
@@ -39,6 +49,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Proiect_Teatru.Middlewares;
 using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -62,6 +73,10 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddSingleton(cfg => cfg.GetRequiredService<IOptions<AuthOptions>>().Value);
+
+builder.Services.Configure<EmailPop3Configuration>(builder.Configuration.GetSection(EmailPop3Configuration.Pop3));
+builder.Services.Configure<EmailSmtpConfiguration>(builder.Configuration.GetSection(EmailSmtpConfiguration.Email));
+builder.Services.Configure<EmailImapConfiguration>(builder.Configuration.GetSection(EmailImapConfiguration.Imap));
 
 builder.Services.AddIdentity<UserEntity, IdentityRole<string>>(
         options =>
@@ -154,6 +169,8 @@ builder.Services.AddTransient(typeof(IBaseGenericRepository<>), typeof(BaseGener
 builder.Services.AddTransient(typeof(IAuditGenericRepository<>), typeof(AuditGenericRepository<>));
 builder.Services.AddTransient(typeof(IFullAuditGenericRepository<>), typeof(FullAuditGenericRepository<>));
 
+builder.Services.AddScoped<IEmailServices, EmailService>();
+builder.Services.AddScoped<IEmailStrategy, GmailStrategy>();
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IApplicationUnitOfWork, ApplicationUnitOfWork>();
@@ -169,16 +186,21 @@ builder.Services.AddTransient<SpectacleRepository>();
 builder.Services.AddTransient<ITeamRepository, TeamRepository>();
 builder.Services.AddTransient<IContractRepository, ContractRepository>();
 builder.Services.AddTransient<ITeamMemberRepository, TeamMemberRepository>();
+
+builder.Services.AddTransient<IEmployeeCompanyEventTypeRepository, EmployeeCompanyEventTypeRepository>();
+builder.Services.AddTransient<ICompanyEventTypeRepository, CompanyEventTypeRepository>();
+builder.Services.AddTransient<ICompanyEventRepository, CompanyEventRepository>();
+
 builder.Services.AddScoped<IEventManagementManager, EventManagementManager>();
 
 builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
-using (var scope = app.Services.GetService<IServiceScopeFactory>()!.CreateScope())
+/*using (var scope = app.Services.GetService<IServiceScopeFactory>()!.CreateScope())
 {
     scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
-}
+}*/
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -188,7 +210,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseMiddleware<ExceptionLoggingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseHttpMetrics();

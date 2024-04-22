@@ -1,8 +1,11 @@
 using Infrastructure.Data;
 using Infrastructure.Repositories.AccountRepository.AccountGenericRepository;
+using Infrastructure.Repositories.BusinessRepository.CompanyEvent.Interface;
+using Infrastructure.Repositories.BusinessRepository.CompanyEventType.Interface;
 using Infrastructure.Repositories.BusinessRepository.Contract.Interface;
 using Infrastructure.Repositories.BusinessRepository.Employee;
 using Infrastructure.Repositories.BusinessRepository.Employee.Interface;
+using Infrastructure.Repositories.BusinessRepository.EmployeeCompanyEventType.Interface;
 using Infrastructure.Repositories.BusinessRepository.EmployeeSalary;
 using Infrastructure.Repositories.BusinessRepository.EmployeeSalary.Interface;
 using Infrastructure.Repositories.BusinessRepository.Event;
@@ -20,43 +23,36 @@ using Infrastructure.Repositories.BusinessRepository.TeamMember.Interface;
 
 namespace Infrastructure.Repositories.UnitOfWorkRepository.ApplicationUnitOfWork;
 
-public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
-{
-    public ApplicationUnitOfWork(ApplicationDbContext context, IEmployeeRepository employeeRepository,
+public class ApplicationUnitOfWork(ApplicationDbContext context, IEmployeeRepository employeeRepository,
         IEmployeeSalaryRepository employeeSalaryRepository, IEventRepository eventRepository,
         IInstitutionRepository institutionRepository, ISpectacleRepository spectacleRepository,
         ITeamMemberRepository teamMemberRepository, ITeamRepository teamRepository,
         IPlaylistRepository playlistRepository, IMusicRepository musicRepository,
-        IContractRepository contractRepository) : base(context)
-    {
-        EmployeeRepository = employeeRepository;
-        EmployeeSalaryRepository = employeeSalaryRepository;
-        EventRepository = eventRepository;
-        InstitutionRepository = institutionRepository;
-        SpectacleRepository = spectacleRepository;
-        TeamRepository = teamRepository;
-        TeamMemberRepository = teamMemberRepository;
-        PlaylistRepository = playlistRepository;
-        MusicRepository = musicRepository;
-        ContractRepository = contractRepository;
-    }
+        IContractRepository contractRepository, ICompanyEventRepository companyEventRepository,
+        ICompanyEventTypeRepository companyEventTypeRepository,
+        IEmployeeCompanyEventTypeRepository employeeCompanyEventTypeRepository)
+    : UnitOfWork(context), IApplicationUnitOfWork
+{
+    public IEmployeeRepository EmployeeRepository { get; } = employeeRepository;
 
-    public IEmployeeRepository EmployeeRepository { get; }
+    public IEmployeeSalaryRepository EmployeeSalaryRepository { get; } = employeeSalaryRepository;
 
-    public IEmployeeSalaryRepository EmployeeSalaryRepository { get; }
+    public IEventRepository EventRepository { get; } = eventRepository;
 
-    public IEventRepository EventRepository { get; }
+    public IInstitutionRepository InstitutionRepository { get; } = institutionRepository;
 
-    public IInstitutionRepository InstitutionRepository { get; }
+    public ISpectacleRepository SpectacleRepository { get; } = spectacleRepository;
 
-    public ISpectacleRepository SpectacleRepository { get; }
+    public ITeamRepository TeamRepository { get; } = teamRepository;
 
-    public ITeamRepository TeamRepository { get; }
+    public ITeamMemberRepository TeamMemberRepository { get; } = teamMemberRepository;
+    public IPlaylistRepository PlaylistRepository { get; } = playlistRepository;
+    public IMusicRepository MusicRepository { get; } = musicRepository;
+    public IContractRepository ContractRepository { get; } = contractRepository;
 
-    public ITeamMemberRepository TeamMemberRepository { get; }
-    public IPlaylistRepository PlaylistRepository { get; }
-    public IMusicRepository MusicRepository { get; }
-    public IContractRepository ContractRepository { get; }
+    public ICompanyEventRepository CompanyEventRepository { get; } = companyEventRepository;
+    public ICompanyEventTypeRepository CompanyEventTypeRepository { get; } = companyEventTypeRepository;
+    public IEmployeeCompanyEventTypeRepository EmployeeCompanyEventTypeRepository { get; } = employeeCompanyEventTypeRepository;
 
     public IAccountGenericRepository GetType<TType>(TType type)
     {
